@@ -17,7 +17,9 @@ body{
     overflow:hidden;
 }
 
-/* FIRST PAGE */
+/* =======================
+   HOME PAGE
+======================= */
 #home{
     width:100vw;
     height:100vh;
@@ -25,7 +27,7 @@ body{
     justify-content:center;
     align-items:center;
 
-    /* Replace this with your own picture */
+    /* Change this to your own background image */
     background-image:url('https://images.unsplash.com/photo-1518199266791-5375a83190b7');
     background-size:cover;
     background-position:center;
@@ -34,42 +36,51 @@ body{
     transition:1s;
 }
 
-/* HEART */
+/* =======================
+   HEART
+======================= */
 .heart{
     position:relative;
-    width:120px;
-    height:120px;
+    width:180px;
+    height:180px;
     background:black;
     transform:rotate(-45deg);
-    border:3px solid red;
     cursor:pointer;
-    box-shadow:0 0 25px red;
+    border:4px solid #ff0000;
+    box-shadow:
+        0 0 20px #ff0000,
+        0 0 40px #ff0000,
+        0 0 60px #ff0000;
     transition:.3s;
 }
 
 .heart:hover{
     transform:rotate(-45deg) scale(1.1);
+    box-shadow:
+        0 0 30px #ff0000,
+        0 0 60px #ff0000,
+        0 0 90px #ff0000;
 }
 
 .heart::before,
 .heart::after{
     content:'';
     position:absolute;
-    width:120px;
-    height:120px;
+    width:180px;
+    height:180px;
     background:black;
-    border:3px solid red;
+    border:4px solid #ff0000;
     border-radius:50%;
 }
 
 .heart::before{
-    top:-60px;
-    left:0;
+    top:-90px;
+    left:-4px;
 }
 
 .heart::after{
-    left:60px;
-    top:0;
+    top:-4px;
+    left:90px;
 }
 
 .heart.open{
@@ -81,20 +92,28 @@ body{
         transform:rotate(-45deg) scale(1);
         opacity:1;
     }
+
+    50%{
+        transform:rotate(-45deg) scale(3);
+        opacity:1;
+    }
+
     100%{
-        transform:rotate(-45deg) scale(8);
+        transform:rotate(-45deg) scale(12);
         opacity:0;
     }
 }
 
-/* LOVE LETTER PAGE */
+/* =======================
+   LOVE LETTER PAGE
+======================= */
 #letter{
     display:none;
     opacity:0;
     width:100vw;
     height:100vh;
 
-    /* Replace this with your own picture */
+    /* Your background image */
     background-image:url('download.jpg');
     background-size:cover;
     background-position:center;
@@ -111,13 +130,15 @@ body{
     opacity:1;
 }
 
-/* WHITE LETTER */
+/* =======================
+   WHITE LETTER
+======================= */
 .paper{
-    width:600px;
+    width:750px;
     background:rgba(255,255,255,0.95);
     color:black;
-    padding:40px;
-    border-radius:20px;
+    padding:50px;
+    border-radius:25px;
     text-align:center;
     box-shadow:0 0 30px rgba(255,0,0,.7);
     backdrop-filter:blur(5px);
@@ -134,38 +155,49 @@ body{
     line-height:1.8;
 }
 
-/* CUTE PICTURES */
+/* =======================
+   CUTE PICTURES
+======================= */
 .pic{
     position:absolute;
-    width:150px;
-    height:150px;
+    width:220px;
+    height:220px;
     object-fit:cover;
-    border-radius:20px;
-    border:3px solid pink;
-    box-shadow:0 0 20px pink;
+    border-radius:25px;
+    border:4px solid pink;
+    box-shadow:
+        0 0 20px pink,
+        0 0 40px pink;
+    transition:.3s;
+}
+
+.pic:hover{
+    transform:scale(1.05);
 }
 
 .top-left{
-    top:60px;
-    left:80px;
+    top:40px;
+    left:40px;
 }
 
 .top-right{
-    top:60px;
-    right:80px;
+    top:40px;
+    right:40px;
 }
 
 .bottom-left{
-    bottom:60px;
-    left:80px;
+    bottom:40px;
+    left:40px;
 }
 
 .bottom-right{
-    bottom:60px;
-    right:80px;
+    bottom:40px;
+    right:40px;
 }
 
-/* FLOATING HEARTS */
+/* =======================
+   FLOATING HEARTS
+======================= */
 .floating-heart{
     position:absolute;
     color:red;
@@ -196,18 +228,11 @@ body{
 <!-- LOVE LETTER PAGE -->
 <div id="letter">
 
-    <!-- Cute Pictures -->
-    <img class="pic top-left"
-    src="Sarah1.jpg">
-
-    <img class="pic top-right"
-    src="Sarah2.jpg">
-
-    <img class="pic bottom-left"
-    src="Sarah3.jpg">
-
-    <img class="pic bottom-right"
-    src="Sarah4.jpg">
+    <!-- PICTURES -->
+    <img class="pic top-left" src="Sarah1.jpg">
+    <img class="pic top-right" src="Sarah2.jpg">
+    <img class="pic bottom-left" src="Sarah3.jpg">
+    <img class="pic bottom-right" src="Sarah4.jpg">
 
     <!-- LOVE LETTER -->
     <div class="paper">
@@ -244,22 +269,22 @@ function openLetter(){
     const home = document.getElementById("home");
     const letter = document.getElementById("letter");
 
-    // Animate heart
+    // Heart animation
     heart.classList.add("open");
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
-        // Fade out home page
+        // Fade home page
         home.style.opacity = "0";
 
-        setTimeout(()=>{
+        setTimeout(() => {
 
             home.style.display = "none";
 
-            // Show love letter page
+            // Show letter page
             letter.style.display = "flex";
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 letter.classList.add("show");
             },100);
 
@@ -270,10 +295,10 @@ function openLetter(){
     },500);
 }
 
-// Floating hearts animation
+// Floating hearts
 function createHearts(){
 
-    setInterval(()=>{
+    setInterval(() => {
 
         const heart = document.createElement("div");
 
@@ -288,7 +313,7 @@ function createHearts(){
         document.getElementById("letter")
             .appendChild(heart);
 
-        setTimeout(()=>{
+        setTimeout(() => {
             heart.remove();
         },6000);
 
