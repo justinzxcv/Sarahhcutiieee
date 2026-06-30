@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Comic Sans MS', cursive;
+    overflow:hidden;
+}
+
+/* FIRST PAGE */
+#home{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    /* Replace this with your own picture */
+    background-image:url('https://images.unsplash.com/photo-1518199266791-5375a83190b7');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    transition:1s;
+}
+
+/* HEART */
+.heart{
+    position:relative;
+    width:120px;
+    height:120px;
+    background:black;
+    transform:rotate(-45deg);
+    border:3px solid red;
+    cursor:pointer;
+    box-shadow:0 0 25px red;
+    transition:.3s;
+}
+
+.heart:hover{
+    transform:rotate(-45deg) scale(1.1);
+}
+
+.heart::before,
+.heart::after{
+    content:'';
+    position:absolute;
+    width:120px;
+    height:120px;
+    background:black;
+    border:3px solid red;
+    border-radius:50%;
+}
+
+.heart::before{
+    top:-60px;
+    left:0;
+}
+
+.heart::after{
+    left:60px;
+    top:0;
+}
+
+.heart.open{
+    animation:openHeart 1s forwards;
+}
+
+@keyframes openHeart{
+    0%{
+        transform:rotate(-45deg) scale(1);
+        opacity:1;
+    }
+    100%{
+        transform:rotate(-45deg) scale(8);
+        opacity:0;
+    }
+}
+
+/* LOVE LETTER PAGE */
+#letter{
+    display:none;
+    opacity:0;
+    width:100vw;
+    height:100vh;
+
+    /* Replace this with your own picture */
+    background-image:url('download.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    position:relative;
+    justify-content:center;
+    align-items:center;
+
+    transition:opacity 1.5s;
+}
+
+#letter.show{
+    opacity:1;
+}
+
+/* WHITE LETTER */
+.paper{
+    width:600px;
+    background:rgba(255,255,255,0.95);
+    color:black;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 0 30px rgba(255,0,0,.7);
+    backdrop-filter:blur(5px);
+    z-index:10;
+}
+
+.paper h1{
+    color:#ff4d6d;
+    margin-bottom:20px;
+}
+
+.paper p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* CUTE PICTURES */
+.pic{
+    position:absolute;
+    width:150px;
+    height:150px;
+    object-fit:cover;
+    border-radius:20px;
+    border:3px solid pink;
+    box-shadow:0 0 20px pink;
+}
+
+.top-left{
+    top:60px;
+    left:80px;
+}
+
+.top-right{
+    top:60px;
+    right:80px;
+}
+
+.bottom-left{
+    bottom:60px;
+    left:80px;
+}
+
+.bottom-right{
+    bottom:60px;
+    right:80px;
+}
+
+/* FLOATING HEARTS */
+.floating-heart{
+    position:absolute;
+    color:red;
+    font-size:25px;
+    animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-100vh);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME PAGE -->
+<div id="home">
+    <div class="heart" id="heart" onclick="openLetter()"></div>
+</div>
+
+<!-- LOVE LETTER PAGE -->
+<div id="letter">
+
+    <!-- Cute Pictures -->
+    <img class="pic top-left"
+    src="Sarah1.jpg">
+
+    <img class="pic top-right"
+    src="Sarah2.jpg">
+
+    <img class="pic bottom-left"
+    src="Sarah3.jpg">
+
+    <img class="pic bottom-right"
+    src="Sarah4.jpg">
+
+    <!-- LOVE LETTER -->
+    <div class="paper">
+        <h1>❤️ To My Love ❤️</h1>
+
+        <p>
+            My Dearest,<br><br>
+
+            Every day with you feels like a beautiful dream
+            that I never want to wake up from.
+            Your smile brightens my darkest days,
+            and your love fills my heart with happiness.<br><br>
+
+            Thank you for being my comfort,
+            my favorite person, and my greatest blessing.
+            No matter where life takes us,
+            I promise to treasure every memory
+            we create together.<br><br>
+
+            You are my today,
+            my tomorrow,
+            and my forever.<br><br>
+
+            I love you more than words can ever express. ❤️
+        </p>
+    </div>
+
+</div>
+
+<script>
+function openLetter(){
+
+    const heart = document.getElementById("heart");
+    const home = document.getElementById("home");
+    const letter = document.getElementById("letter");
+
+    // Animate heart
+    heart.classList.add("open");
+
+    setTimeout(()=>{
+
+        // Fade out home page
+        home.style.opacity = "0";
+
+        setTimeout(()=>{
+
+            home.style.display = "none";
+
+            // Show love letter page
+            letter.style.display = "flex";
+
+            setTimeout(()=>{
+                letter.classList.add("show");
+            },100);
+
+            createHearts();
+
+        },1000);
+
+    },500);
+}
+
+// Floating hearts animation
+function createHearts(){
+
+    setInterval(()=>{
+
+        const heart = document.createElement("div");
+
+        heart.className = "floating-heart";
+        heart.innerHTML = "❤️";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "0";
+        heart.style.animationDuration =
+            (Math.random() * 3 + 3) + "s";
+
+        document.getElementById("letter")
+            .appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },6000);
+
+    },300);
+}
+</script>
+
+</body>
+</html>
